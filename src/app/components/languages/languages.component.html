@@ -1,0 +1,76 @@
+<button type="button" class="btn btn-primary btn-lg btn-block mt-2" data-toggle="modal" data-target="#addModal">Add Language</button>
+
+<div class="row mt-5">
+    <div class="col-md-4 mb-3" *ngFor="let language of languages">
+        <div class="card-body">
+            <h5 class="card-title">{{language.name}}</h5>
+            <p  class="card-text">{{language.last_update}}</p>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary mr-1" data-toggle="modal" data-target="#editModal" (click)="editLanguageData=language">Edit</button>
+            <button type="button" class="btn btn-primary mr-1" (click)="deleteLanguage(language._links.self.href)">Delete</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Language</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="languageName">Name</label>
+                  <input type="text" class="form-control" id="languageName" aria-describedby="emailHelp" placeholder="Enter title" [(ngModel)]="addLanguageData.name" name="name">
+                </div>
+                <div class="form-group">
+                  <label for="languageLastUpdate">Last Update</label>
+                  <input type="datetime-local" class="form-control" id="languageLastUpdate" placeholder="Enter detail" [(ngModel)]="addLanguageData.last_update" name="last_update">
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addLanguage()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Language</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="languageName">Name</label>
+                  <input type="text" class="form-control" id="languageName" aria-describedby="emailHelp" placeholder="Enter title" *ngIf="editLanguageData" [(ngModel)]="editLanguageData.name" name="name">
+                </div>
+                <div class="form-group">
+                  <label for="languageLastUpdate">Last Update</label>
+                  <input type="datetime-local" class="form-control" id="languageLastUpdate" placeholder="Enter detail" *ngIf="editLanguageData" [(ngModel)]="editLanguageData.last_update" name="last_update">
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="editLanguage()">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
